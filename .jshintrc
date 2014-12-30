@@ -7,5 +7,8 @@
   "trailing": true,
   "indent": 2,
   "esnext": true,
-  "experimental": ["asyncawait"]
+  "experimental": ["asyncawait"],
+  "predef": [
+    "-Promise"
+  ]
 }

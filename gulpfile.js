@@ -1,12 +1,11 @@
 "use strict";
-
 var gulp = require('gulp'),
     merge = require('merge-stream'),
     mocha = require('gulp-mocha'),
-    Q = require('q'),
+    Promise = require('bluebird'),
     spawnWatcher = require('appium-gulp-plugins').spawnWatcher.use(gulp),
     Transpiler = require('appium-gulp-plugins').Transpiler,
-    runSequence = Q.denodeify(require('run-sequence')),
+    runSequence = Promise.promisify(require('run-sequence')),
     jshint = require('gulp-jshint'),
     jscs = require('gulp-jscs'),
     vinylPaths = require('vinyl-paths'),
@@ -87,4 +86,16 @@ gulp.task('once', function () {
 });
 
 gulp.task('default', ['watch']);
+
+// jenkins specific tasks
+
+gulp.task('clear-jenkins', function () {
+  var manager = require('./build/lib/manager').default;
+  return manager.clearJenkins();
+});
+
+gulp.task('configure-jenkins', ['clear-jenkins'], function () {
+  var manager = require('./build/lib/manager').default;
+  return manager.configureJenkins();
+});
 

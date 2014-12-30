@@ -18,5 +18,8 @@
     "after": true,
     "beforeEach": true,
     "afterEach": true
-  }
+  },
+  "predef": [
+    "-Promise"
+  ]
 }
